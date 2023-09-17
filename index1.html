@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Website</title>
+    <!-- Include Bootstrap CSS and JS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Your header content goes here -->
+    </header>
+    <main>
+        <!-- Pricing tables go here -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 pricing-table">
+                    <h3>Plan 1</h3>
+                    <p>Price: $10/month</p>
+                </div>
+                <div class="col-md-4 pricing-table">
+                    <h3>Plan 2</h3>
+                    <p>Price: $20/month</p>
+                </div>
+                <div class="col-md-4 pricing-table">
+                    <h3>Plan 3</h3>
+                    <p>Price: $30/month</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Order Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for Name, Email, and Order Comments -->
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comments">Order Comments:</label>
+                            <textarea class="form-control" id="comments" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitOrder">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Slider -->
+    <div class="container mt-4">
+        <input type="range" class="custom-range" id="userSlider" min="0" max="100" value="0">
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Open the modal when a pricing table is clicked
+            const pricingTables = document.querySelectorAll(".pricing-table");
+            pricingTables.forEach((table, index) => {
+                table.addEventListener("click", () => {
+                    // Open the modal
+                    $("#myModal").modal("show");
+
+                    // Highlight the plan based on the index
+                    highlightPlan(index);
+                });
+            });
+
+            // Highlight the plan based on the user slider value
+            const userSlider = document.getElementById("userSlider");
+            userSlider.addEventListener("input", () => {
+                const value = parseInt(userSlider.value);
+                highlightPlan(Math.floor(value / 10));
+            });
+
+            // Function to highlight the plan based on the index
+            function highlightPlan(index) {
+                pricingTables.forEach((table, i) => {
+                    if (i === index) {
+                        table.classList.add("highlighted");
+                    } else {
+                        table.classList.remove("highlighted");
+                    }
+                });
+            }
+
+            // Handle form submission
+            const submitButton = document.getElementById("submitOrder");
+            const orderForm = document.getElementById("orderForm");
+            submitButton.addEventListener("click", () => {
+                // Handle form submission here
+                // You can access form fields using document.getElementById
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const comments = document.getElementById("comments").value;
+
+                // Perform form validation and submission as needed
+                console.log("Name:", name);
+                console.log("Email:", email);
+                console.log("Comments:", comments);
+
+                // Close the modal
+                $("#myModal").modal("hide");
+            });
+        });
+
+
+// Fill in the form fields with the data
+nameField.value = name;
+emailField.value = email;
+commentsField.value = comments;
+
+
+document.addEventListener("DOMContentLoaded", function () {
+        // ... (Your existing code for Task 1)
+
+        // Function to populate the form fields on the target website
+        function populateFormOnTargetWebsite() {
+            // Replace these values with the data from Task 1
+            const name = "Your Name";
+            const email = "your.email@example.com";
+            const comments = "Your comments go here";
+
+            // Replace these with the actual IDs of the form fields on the target website
+            const targetNameField = document.getElementById("nameField");
+const targetEmailField = document.getElementById("emailField");
+const targetCommentsField = document.getElementById("commentsField");
+
+
+            // Fill in the form fields on the target website
+            if (targetNameField && targetEmailField && targetCommentsField) {
+                targetNameField.value = name;
+                targetEmailField.value = email;
+                targetCommentsField.value = comments;
+
+                // Submit the form on the target website (if needed)
+                // You may need to adapt this part based on the target website's structure and requirements
+                targetForm.submit(); // Uncomment this line if you need to submit the form automatically
+            }
+        }
+
+        // Call the function to populate the form on the target website
+        populateFormOnTargetWebsite();
+    });
+
+
+    </script>
+</body>
+</html>
