@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy Loading Example</title>
+    <style>
+        /* Add your CSS styles here */
+        .result-item {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        #loader {
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="results">
+        <!-- Initial results go here -->
+    </div>
+
+    <div id="loader">
+        Loading...
+    </div>
+
+    <script>
+        function generateInitialResults() {
+            const resultsContainer = document.getElementById("results");
+
+            for (let i = 1; i <= 10; i++) {
+                const resultItem = document.createElement("div");
+                resultItem.classList.add("result-item");
+                resultItem.textContent = `Result ${i}`;
+                resultsContainer.appendChild(resultItem);
+            }
+        }
+
+        function loadMoreResults() {
+            const resultsContainer = document.getElementById("results");
+            const loader = document.getElementById("loader");
+
+            // Simulate loading more results (you can fetch data from an API here)
+            for (let i = 11; i <= 20; i++) {
+                const resultItem = document.createElement("div");
+                resultItem.classList.add("result-item");
+                resultItem.textContent = `Result ${i}`;
+                resultsContainer.appendChild(resultItem);
+            }
+
+            // Hide the loader
+            loader.style.display = "none";
+        }
+
+        function handleIntersection(entries) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Show the loader
+                    const loader = document.getElementById("loader");
+                    loader.style.display = "block";
+
+                    // Load more results
+                    loadMoreResults();
+                }
+            });
+        }
+
+        const options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.1,
+        };
+        const observer = new IntersectionObserver(handleIntersection, options);
+        const sentinel = document.createElement("div");
+        observer.observe(sentinel);
+        document.body.appendChild(sentinel);
+
+        // Call the function to generate initial results when the page loads
+        generateInitialResults();
+    </script>
+</body>
+</html>
